@@ -157,6 +157,10 @@ struct PopularItems {
         PopularItem(id: UUID(), name: "Low Rise Chrome Heart Jeans", image: "ytwok", prices: [], categories: ["clothing"], description: "These are a type of denim jeans that feature a low-rise waist and embroidered Chrome Heart branding on the back pockets. This piece is very Y2K-inspired and has continued to make a comeback and will most likely remain a strong fashion statement."),
         PopularItem(id: UUID(), name: "Blazers", image: "blazers", prices: [], categories: ["clothing"], description: "Blazers are a type of jacket that are designed to be worn as part of a formal or professional attire. They are a popular choice for those looking to return to the classics of the modern wardrobe, and are often paired with straight leg jeans, button down shirts, and interesting loafers or leather sneakers."),
         PopularItem(id: UUID(), name: "Trench Coats", image: "trenchcoats", prices: [], categories: ["clothing"], description: "Trench coats are a type of coat that are designed to be worn in inclement weather. They are a popular choice for those looking to return to the classics of the modern wardrobe, and are often paired with straight leg jeans and blazers."),
+        PopularItem(id: UUID(), name: "oversized blazers", image: "blazers", prices: [], categories: ["clothing"], description: "Oversized blazers are a popular trend that features larger than normal blazers with a casual, relaxed look."),
+            PopularItem(id: UUID(), name: "corset-inspired tops", image: "corsets", prices: [], categories: ["clothing"], description: "Corset-inspired tops are a popular trend that features tops with corset-like detailing and a tight-to-the-body fit."),
+            PopularItem(id: UUID(), name: "sheer dresses", image: "sheer", prices: [], categories: ["clothing"], description: "Sheer dresses are a popular trend that features dresses made from sheer, semi-transparent fabrics."),
+            PopularItem(id: UUID(), name: "cutout tops", image: "cutouts", prices: [], categories: ["clothing"], description: "Cutout tops are a popular trend that features tops with cutout designs and dramatic waistlines."),
        
         
         
@@ -168,10 +172,9 @@ struct PopularItems {
         
         
         
-        PopularItem(id: UUID(), name: "oversized blazers", image: "blazers", prices: [], categories: ["clothing", "trending"], description: "Oversized blazers are a popular trend that features larger than normal blazers with a casual, relaxed look."),
-            PopularItem(id: UUID(), name: "corset-inspired tops", image: "corsets", prices: [], categories: ["clothing", "trending"], description: "Corset-inspired tops are a popular trend that features tops with corset-like detailing and a tight-to-the-body fit."),
-            PopularItem(id: UUID(), name: "sheer dresses", image: "sheer", prices: [], categories: ["clothing", "trending"], description: "Sheer dresses are a popular trend that features dresses made from sheer, semi-transparent fabrics."),
-            PopularItem(id: UUID(), name: "cutout tops", image: "cutouts", prices: [], categories: ["clothing", "trending"], description: "Cutout tops are a popular trend that features tops with cutout designs and dramatic waistlines."),
+        
+
     ]
 
 }
+

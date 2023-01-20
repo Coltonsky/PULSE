@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 @main
 struct The_PulseApp: App {
     let persistenceController = PersistenceController.shared
