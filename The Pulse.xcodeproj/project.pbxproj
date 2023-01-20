@@ -7,26 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		98C90A292979174500CDC7B7 /* Market_Cost_2_0App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C90A282979174500CDC7B7 /* Market_Cost_2_0App.swift */; };
-		98C90A2B2979174500CDC7B7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C90A2A2979174500CDC7B7 /* ContentView.swift */; };
-		98C90A2D2979174600CDC7B7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98C90A2C2979174600CDC7B7 /* Assets.xcassets */; };
-		98C90A302979174600CDC7B7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 98C90A2F2979174600CDC7B7 /* Preview Assets.xcassets */; };
-		98C90A322979174600CDC7B7 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C90A312979174600CDC7B7 /* Persistence.swift */; };
-		98C90A352979174600CDC7B7 /* Market_Cost_2_0.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 98C90A332979174600CDC7B7 /* Market_Cost_2_0.xcdatamodeld */; };
+		9850CC5929794503001E35BA /* The_PulseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9850CC5829794503001E35BA /* The_PulseApp.swift */; };
+		9850CC5B29794503001E35BA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9850CC5A29794503001E35BA /* ContentView.swift */; };
+		9850CC6229794505001E35BA /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9850CC6129794505001E35BA /* Persistence.swift */; };
+		9850CC6529794505001E35BA /* The_Pulse.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9850CC6329794505001E35BA /* The_Pulse.xcdatamodeld */; };
+		9850CC6C29794BBB001E35BA /* Assets.xcassets in Sources */ = {isa = PBXBuildFile; fileRef = 9850CC5C29794505001E35BA /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		98C90A252979174500CDC7B7 /* Market Cost 2.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Market Cost 2.0.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		98C90A282979174500CDC7B7 /* Market_Cost_2_0App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Market_Cost_2_0App.swift; sourceTree = "<group>"; };
-		98C90A2A2979174500CDC7B7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		98C90A2C2979174600CDC7B7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		98C90A2F2979174600CDC7B7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		98C90A312979174600CDC7B7 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		98C90A342979174600CDC7B7 /* Market_Cost_2_0.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Market_Cost_2_0.xcdatamodel; sourceTree = "<group>"; };
+		9850CC5529794503001E35BA /* The Pulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Pulse.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9850CC5829794503001E35BA /* The_PulseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = The_PulseApp.swift; sourceTree = "<group>"; };
+		9850CC5A29794503001E35BA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		9850CC5C29794505001E35BA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9850CC5F29794505001E35BA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		9850CC6129794505001E35BA /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		9850CC6429794505001E35BA /* The_Pulse.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = The_Pulse.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		98C90A222979174500CDC7B7 /* Frameworks */ = {
+		9850CC5229794503001E35BA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -36,39 +35,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		98C90A1C2979174500CDC7B7 = {
+		9850CC4C29794503001E35BA = {
 			isa = PBXGroup;
 			children = (
-				98C90A272979174500CDC7B7 /* Market Cost 2.0 */,
-				98C90A262979174500CDC7B7 /* Products */,
+				9850CC5729794503001E35BA /* The Pulse */,
+				9850CC5629794503001E35BA /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		98C90A262979174500CDC7B7 /* Products */ = {
+		9850CC5629794503001E35BA /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				98C90A252979174500CDC7B7 /* Market Cost 2.0.app */,
+				9850CC5529794503001E35BA /* The Pulse.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		98C90A272979174500CDC7B7 /* Market Cost 2.0 */ = {
+		9850CC5729794503001E35BA /* The Pulse */ = {
 			isa = PBXGroup;
 			children = (
-				98C90A282979174500CDC7B7 /* Market_Cost_2_0App.swift */,
-				98C90A2A2979174500CDC7B7 /* ContentView.swift */,
-				98C90A2C2979174600CDC7B7 /* Assets.xcassets */,
-				98C90A312979174600CDC7B7 /* Persistence.swift */,
-				98C90A332979174600CDC7B7 /* Market_Cost_2_0.xcdatamodeld */,
-				98C90A2E2979174600CDC7B7 /* Preview Content */,
+				9850CC5829794503001E35BA /* The_PulseApp.swift */,
+				9850CC5A29794503001E35BA /* ContentView.swift */,
+				9850CC5C29794505001E35BA /* Assets.xcassets */,
+				9850CC6129794505001E35BA /* Persistence.swift */,
+				9850CC6329794505001E35BA /* The_Pulse.xcdatamodeld */,
+				9850CC5E29794505001E35BA /* Preview Content */,
 			);
-			path = "Market Cost 2.0";
+			path = "The Pulse";
 			sourceTree = "<group>";
 		};
-		98C90A2E2979174600CDC7B7 /* Preview Content */ = {
+		9850CC5E29794505001E35BA /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				98C90A2F2979174600CDC7B7 /* Preview Assets.xcassets */,
+				9850CC5F29794505001E35BA /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -76,39 +75,38 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		98C90A242979174500CDC7B7 /* Market Cost 2.0 */ = {
+		9850CC5429794503001E35BA /* The Pulse */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 98C90A382979174600CDC7B7 /* Build configuration list for PBXNativeTarget "Market Cost 2.0" */;
+			buildConfigurationList = 9850CC6829794505001E35BA /* Build configuration list for PBXNativeTarget "The Pulse" */;
 			buildPhases = (
-				98C90A212979174500CDC7B7 /* Sources */,
-				98C90A222979174500CDC7B7 /* Frameworks */,
-				98C90A232979174500CDC7B7 /* Resources */,
+				9850CC5129794503001E35BA /* Sources */,
+				9850CC5229794503001E35BA /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Market Cost 2.0";
-			productName = "Market Cost 2.0";
-			productReference = 98C90A252979174500CDC7B7 /* Market Cost 2.0.app */;
+			name = "The Pulse";
+			productName = "The Pulse";
+			productReference = 9850CC5529794503001E35BA /* The Pulse.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		98C90A1D2979174500CDC7B7 /* Project object */ = {
+		9850CC4D29794503001E35BA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					98C90A242979174500CDC7B7 = {
+					9850CC5429794503001E35BA = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
-			buildConfigurationList = 98C90A202979174500CDC7B7 /* Build configuration list for PBXProject "Market Cost 2.0" */;
+			buildConfigurationList = 9850CC5029794503001E35BA /* Build configuration list for PBXProject "The Pulse" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -116,44 +114,33 @@
 				en,
 				Base,
 			);
-			mainGroup = 98C90A1C2979174500CDC7B7;
-			productRefGroup = 98C90A262979174500CDC7B7 /* Products */;
+			mainGroup = 9850CC4C29794503001E35BA;
+			productRefGroup = 9850CC5629794503001E35BA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				98C90A242979174500CDC7B7 /* Market Cost 2.0 */,
+				9850CC5429794503001E35BA /* The Pulse */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		98C90A232979174500CDC7B7 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				98C90A302979174600CDC7B7 /* Preview Assets.xcassets in Resources */,
-				98C90A2D2979174600CDC7B7 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		98C90A212979174500CDC7B7 /* Sources */ = {
+		9850CC5129794503001E35BA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98C90A352979174600CDC7B7 /* Market_Cost_2_0.xcdatamodeld in Sources */,
-				98C90A322979174600CDC7B7 /* Persistence.swift in Sources */,
-				98C90A2B2979174500CDC7B7 /* ContentView.swift in Sources */,
-				98C90A292979174500CDC7B7 /* Market_Cost_2_0App.swift in Sources */,
+				9850CC6C29794BBB001E35BA /* Assets.xcassets in Sources */,
+				9850CC6229794505001E35BA /* Persistence.swift in Sources */,
+				9850CC5B29794503001E35BA /* ContentView.swift in Sources */,
+				9850CC5929794503001E35BA /* The_PulseApp.swift in Sources */,
+				9850CC6529794505001E35BA /* The_Pulse.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		98C90A362979174600CDC7B7 /* Debug */ = {
+		9850CC6629794505001E35BA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -213,7 +200,7 @@
 			};
 			name = Debug;
 		};
-		98C90A372979174600CDC7B7 /* Release */ = {
+		9850CC6729794505001E35BA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -267,14 +254,14 @@
 			};
 			name = Release;
 		};
-		98C90A392979174600CDC7B7 /* Debug */ = {
+		9850CC6929794505001E35BA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Market Cost 2.0/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"The Pulse/Preview Content\"";
 				DEVELOPMENT_TEAM = MST67K6QGC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -288,7 +275,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "startup.Market-Cost-2-0";
+				PRODUCT_BUNDLE_IDENTIFIER = "startup.The-Pulse";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -296,14 +283,14 @@
 			};
 			name = Debug;
 		};
-		98C90A3A2979174600CDC7B7 /* Release */ = {
+		9850CC6A29794505001E35BA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Market Cost 2.0/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"The Pulse/Preview Content\"";
 				DEVELOPMENT_TEAM = MST67K6QGC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -317,7 +304,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "startup.Market-Cost-2-0";
+				PRODUCT_BUNDLE_IDENTIFIER = "startup.The-Pulse";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -328,20 +315,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		98C90A202979174500CDC7B7 /* Build configuration list for PBXProject "Market Cost 2.0" */ = {
+		9850CC5029794503001E35BA /* Build configuration list for PBXProject "The Pulse" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				98C90A362979174600CDC7B7 /* Debug */,
-				98C90A372979174600CDC7B7 /* Release */,
+				9850CC6629794505001E35BA /* Debug */,
+				9850CC6729794505001E35BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		98C90A382979174600CDC7B7 /* Build configuration list for PBXNativeTarget "Market Cost 2.0" */ = {
+		9850CC6829794505001E35BA /* Build configuration list for PBXNativeTarget "The Pulse" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				98C90A392979174600CDC7B7 /* Debug */,
-				98C90A3A2979174600CDC7B7 /* Release */,
+				9850CC6929794505001E35BA /* Debug */,
+				9850CC6A29794505001E35BA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -349,17 +336,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		98C90A332979174600CDC7B7 /* Market_Cost_2_0.xcdatamodeld */ = {
+		9850CC6329794505001E35BA /* The_Pulse.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				98C90A342979174600CDC7B7 /* Market_Cost_2_0.xcdatamodel */,
+				9850CC6429794505001E35BA /* The_Pulse.xcdatamodel */,
 			);
-			currentVersion = 98C90A342979174600CDC7B7 /* Market_Cost_2_0.xcdatamodel */;
-			path = Market_Cost_2_0.xcdatamodeld;
+			currentVersion = 9850CC6429794505001E35BA /* The_Pulse.xcdatamodel */;
+			path = The_Pulse.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
 /* End XCVersionGroup section */
 	};
-	rootObject = 98C90A1D2979174500CDC7B7 /* Project object */;
+	rootObject = 9850CC4D29794503001E35BA /* Project object */;
 }

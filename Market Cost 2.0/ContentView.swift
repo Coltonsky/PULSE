@@ -1,88 +1,157 @@
-//
-//  ContentView.swift
-//  Market Cost 2.0
-//
-//  Created by James Wright on 1/18/23.
-//
-
 import SwiftUI
-import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
+let popularItems: [PopularItem] = [ PopularItem(id: UUID(), name: "Bread", image: "bread", prices: [], categories: ["food"]),
+PopularItem(id: UUID(), name: "Milk", image: "milk", prices: [], categories: ["food"]),
+PopularItem(id: UUID(), name: "Eggs", image: "eggs", prices: [], categories: ["food"]),
+PopularItem(id: UUID(), name: "Apples", image: "apples", prices: [], categories: ["food"]),
+PopularItem(id: UUID(), name: "Bananas", image: "bananas", prices: [], categories: ["food"]),
+PopularItem(id: UUID(), name: "Cereal", image: "cereal", prices: [], categories: ["food"]),
+PopularItem(id: UUID(), name: "Toilet paper", image: "toiletpaper", prices: [], categories: ["household"]),
+PopularItem(id: UUID(), name: "Hand sanitizer", image: "handsanitizer", prices: [], categories: ["household"]),
+                                    PopularItem(id: UUID(), name: "Frozen Pizza", image: "pizza", prices: [], categories: ["food"]),
+                                    PopularItem(id: UUID(), name: "Laundry detergent", image: "laundrydetergent", prices: [], categories: ["household"]),
+                                    PopularItem(id: UUID(), name: "Paper towels", image: "papertowels", prices: [], categories: ["household"]),
+                                    PopularItem(id: UUID(), name: "Pasta", image: "pasta", prices: [], categories: ["food"]),
+                                    PopularItem(id: UUID(), name: "Peanut butter", image: "peanutbutter", prices: [], categories: ["food"]),
+                                    PopularItem(id: UUID(), name: "Coca-Cola", image: "soda", prices: [], categories: ["food"]),
+                                    PopularItem(id: UUID(), name: "Case of Water", image: "water", prices: [], categories: ["food"]),
 
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
+]
     var body: some View {
         NavigationView {
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
+                VStack(alignment: .center) {
+                    HStack {
+                    Image(systemName: "figure.mind.and.body")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.white)
+                            .padding(.trailing, 10)
+                        Text("Recent Finds")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                            .fontWeight(.bold)
+                        Image(systemName: "figure.mind.and.body")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                            .foregroundColor(.white)
+                            .padding(.leading, 10)
+                    }
+                    .padding()
+                    .background(LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .top, endPoint: .bottom))
+                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .shadow(radius: 10)
+                    
+                    HStack {
+                        VStack {
+               Image(systemName: "tshirt")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .padding()
+                                .padding(.top, 10)
+                                .foregroundColor(.black)
+                            ScrollView(.vertical) {
+                                ForEach(popularItems.filter { $0.categories.contains("food") }) { item in
+                                    NavigationLink(destination: ProductDetailView(item: item)) {
+                                        ProductCardView(item: item)
+                                    }
+                                    Spacer()
+                                }
+                            }
+                            .padding()
+                        }
+                        VStack {
+                        Image(systemName: "house.fill")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                                .padding()
+                                .foregroundColor(.black)
+                                .padding(.top, 10)
+ 
+                            ScrollView(.vertical) {
+                                ForEach(popularItems.filter { $0.categories.contains("household") }) { item in
+                                    NavigationLink(destination: ProductDetailView(item: item)) {
+                                        ProductCardView(item: item)
+                                    }
+                                    Spacer()
+                                }
+                            }
+                            .padding()
+                        }
+                    }
+                            }
+                          }
+        }
+    }
+}
+
+struct ProductCardView: View {
+    let item: PopularItem
+    
+    var body: some View {
+        VStack(alignment: .center) {
+                    Image(item.image)
+                        .resizable()
+                        .frame(width: 120, height: 120)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .shadow(radius: 20)
+                }
+                .padding(20)
+                .frame(maxWidth: 130)
+                .background(LinearGradient(gradient: Gradient(colors: [Color(red:0.15, green:0.15, blue:0.15), Color(red:0.10, green:0.10, blue:0.10)]), startPoint: .top, endPoint: .bottom))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+
+    }
+}
+
+
+struct ProductDetailView: View {
+    let item: PopularItem
+    
+    var body: some View {
+        VStack {
+            Image(item.image)
+                .resizable()
+                .frame(width: 300, height: 300)
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .shadow(radius: 10)
+            Text(item.name)
+                .foregroundColor(.white)
+                .font(.largeTitle)
             List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp!, formatter: itemFormatter)")
-                    } label: {
-                        Text(item.timestamp!, formatter: itemFormatter)
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
+                ForEach(item.prices) { price in
+                    HStack {
+                        Text(price.store)
+                            .foregroundColor(.white)
+                            .font(.headline)
+                        Spacer()
+                        Text("$\(String(format: "%.2f", price.price))")
+                            .foregroundColor(.white)
+                            .font(.headline)
                     }
                 }
             }
-            Text("Select an item")
         }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+        .padding()
+        .background(Color.red)
     }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
+struct Price: Identifiable {
+    let id = UUID()
+    let store: String
+    let price: Double
 }
+
+
+struct PopularItem: Identifiable {
+    var id: UUID
+    var name: String
+    var image: String
+    var prices: [Price]
+    var categories: [String]
+}
+
