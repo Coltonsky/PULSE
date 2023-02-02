@@ -10,7 +10,7 @@ struct ContentView: View {
     @State private var currentIcon = "trending"
     @State private var originalIcon = "trending"
     @State private var icons = ["trending", "shirt", "pant", "accessories", "shoe"]
-
+    
     var body: some View {
         NavigationView {
             ZStack {
@@ -178,18 +178,18 @@ struct ContentView: View {
                             
                             .navigationBarItems(leading:
                                                     NavigationLink(destination: SearchView(popularitems:popularItems)) {
-                                                        RoundedRectangle(cornerRadius: 10)
-                                                            .frame(width: 35, height: 35)
-                                                            .foregroundColor(.black)
-                                                            .opacity(0.8)
-                                                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                                                            .overlay(
-                                                                Image(systemName: "magnifyingglass")
-                                                                    .resizable()
-                                                                    .foregroundColor(.white)
-                                                                    .padding(10)
-                                                            )
-                                                    },
+                                RoundedRectangle(cornerRadius: 10)
+                                    .frame(width: 35, height: 35)
+                                    .foregroundColor(.black)
+                                    .opacity(0.5)
+                                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                                    .overlay(
+                                        Image(systemName: "magnifyingglass")
+                                            .resizable()
+                                            .foregroundColor(.white)
+                                            .padding(10)
+                                    )
+                            },
                                                 trailing:
                                                     NavigationLink(destination: ProfileView()) {
                                 RoundedRectangle(cornerRadius: 10)
@@ -211,10 +211,11 @@ struct ContentView: View {
             }
         }
     }
+    
     struct SearchView: View {
         @State private var searchTerm: String = ""
         let popularitems: [PopularItem]
-
+        
         var body: some View {
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .top, endPoint: .bottom)
@@ -227,7 +228,7 @@ struct ContentView: View {
                             .frame(width: 325, height: 40)
                             .background(Color.white)
                             .cornerRadius(5.0)
-
+                        
                         Button(action: {
                             // perform search based on searchTerm
                         }) {
@@ -239,7 +240,7 @@ struct ContentView: View {
                     }
                     .padding(.top, 10)
                     .padding(.bottom, 20)
-
+                    
                     // Display search results here
                     ScrollView(.vertical, showsIndicators: false) {
                         VStack(alignment: .center, spacing: 20) {
@@ -247,8 +248,8 @@ struct ContentView: View {
                                 self.searchTerm.isEmpty ? true :
                                 item.name.lowercased().contains(self.searchTerm.lowercased()) || item.description.lowercased().contains(self.searchTerm.lowercased()) || item.image.lowercased().contains(self.searchTerm.lowercased()) ||
                                 item.prices.contains(self.searchTerm)
-                                        }, id: \.id) { item in
-                                            ProductCardView(item: item)
+                            }, id: \.id) { item in
+                                ProductCardView(item: item)
                             }
                         }
                     }
@@ -257,101 +258,152 @@ struct ContentView: View {
         }
     }
 
-
-
-
-struct ProductCardView: View {
-    let item: PopularItem
-    @State private var isLiked: Bool = false
-
-    var body: some View {
-        NavigationLink(destination: ProductDetailView(item: item)) {
-            ZStack {
-                VStack(alignment: .center, spacing: -30) {
-                    Image(item.image)
-                    
-                        .resizable()
-                        .padding()
-                        .padding(.top, 15)
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 180, height: 180)
-                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                        .background(LinearGradient(gradient: Gradient(colors: [Color.white, Color.white.opacity(0.65)]), startPoint: .top, endPoint: .bottom))
-                        .clipShape(RoundedRectangle(cornerRadius: 35))
-                        .overlay(RoundedRectangle(cornerRadius: 35).stroke(Color.white, lineWidth: 1))
-                    Image(item.description)
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .frame(width: 50, height: 50)
-                        .offset(x: -55, y: -150)
-                    Button(action: {
-                        self.isLiked.toggle()
-                    }) {
-                        if self.isLiked {
-                            Image(systemName: "heart.fill")
-                                .resizable()
-                                .frame(width: 27, height: 27)
-                                .foregroundColor(.red)
-                        } else {
-                            Image(systemName: "heart.fill")
-                                .resizable()
-                                .frame(width: 25, height: 25)
-                                .foregroundColor(.gray)
-                        }
-                    }
-                    .offset(x: 60, y: -155)
-                }
-            }
-        }
-    }
-}
-    
     struct ProfileView: View {
-        @State private var userClosetItems: [PopularItem] = []
-        
+        let popularItems = PopularItems().items
+            
         var body: some View {
             NavigationView {
                 ZStack {
-                    LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .top, endPoint: .bottom)
-                        .edgesIgnoringSafeArea(.all)
-                    
-                    VStack(spacing: 20) {
-                        
+                        Color.white
+                                .edgesIgnoringSafeArea(.all)
+
+                            VStack{
+                                ScrollView(.horizontal) {
+                                    HStack(spacing: 20) {
+                                        ForEach(popularItems.filter { $0.categories.contains("trendingaccessories")}) { item in
+                                            Image(item.image)
+                                                .resizable()
+                                                .padding(.top, 10)
+                                                .frame(width: 145, height: 125)
+                                        }
+                                    }
+                                }
+                                
                         Circle()
-                                                .frame(width: 75, height: 75)
-                                                .foregroundColor(.white)
-                                                .overlay(Circle().stroke(Color.white, lineWidth: 4))
-                                                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                                                .overlay(
-                                                    Image(systemName: "rectangle.stack.person.crop")
-                                                        .resizable()
-                                                        .aspectRatio(contentMode: .fill)
-                                                        .padding(20)
-                                                )
-                            ForEach(0..<4, id: \.self) { index in
-                                HStack {
-                                    Image(index == 0 ? "shirt" : index == 1 ? "pant" : index == 2 ? "shoe" : "accessories")
+                            .frame(width: 85, height: 85)
+                            .foregroundColor(.white)
+                            .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                            .overlay(
+                                Image(systemName: "person.fill.badge.plus")
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .padding(10)
+                            )
+
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 20) {
+                                ForEach(popularItems.filter { $0.categories.contains("trendingtops")}) { item in
+                                    Image(item.image)
                                         .resizable()
-                                        .frame(width: 20, height: 20)
-                                        .padding(.trailing, 50)
-                                        .foregroundColor(.white)
-                                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                                    
-                                    RoundedRectangle(cornerRadius: 20)
-                                        .frame(width: 125, height: 125)
-                                        .foregroundColor(.white)
-                                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white, lineWidth: 4))
-                                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
-                                        .padding(.trailing, 80)
+                                        .aspectRatio(contentMode: .fill)
+                                        .padding(.top, -15)
+                                        .frame(width: 195, height: 225)
                                 }
                             }
                         }
+                                    
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 10) {
+                                ForEach(popularItems.filter { $0.categories.contains("trendingbottoms")}) { item in
+                                    Image(item.image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .padding(.top, -35)
+                                        .frame(width: 185, height: 235)
+                                }
+                            }
+                        }
+                                    
+
+                        ScrollView(.horizontal) {
+                            HStack(spacing: 20) {
+                                ForEach(popularItems.filter { $0.categories.contains("trendingshoes")}) { item in
+                                    Image(item.image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .padding(.top, -40)
+                                        .frame(width: 175, height: 135)
+                                }
+                            }
+                            .padding(.bottom, 30)
+                        }
+                      }
+                            .mask(
+                                HStack(spacing: 0) {
+
+                                    // Left gradient
+                                    LinearGradient(gradient:
+                                       Gradient(
+                                           colors: [Color.white.opacity(0), Color.white]),
+                                           startPoint: .leading, endPoint: .trailing
+                                       )
+                                       .frame(width: 150)
+
+                                    // Middle
+                                    Rectangle().fill(Color.white)
+
+                                    // Right gradient
+                                    LinearGradient(gradient:
+                                       Gradient(
+                                           colors: [Color.white, Color.white.opacity(0)]),
+                                           startPoint: .leading, endPoint: .trailing
+                                       )
+                                       .frame(width: 150)
+                         }
+                      )
+                   }
+                }
+            }
+         }
+     }
+ 
+    struct ProductCardView: View {
+        let item: PopularItem
+        @State private var isLiked: Bool = false
+        
+        var body: some View {
+            NavigationLink(destination: ProductDetailView(item: item)) {
+                ZStack {
+                    VStack(alignment: .center, spacing: -30) {
+                        Image(item.image)
+                            .resizable()
+                            .padding()
+                            .padding(.top, 15)
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 180, height: 180)
+                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                            .background(LinearGradient(gradient: Gradient(colors: [Color.white, Color.white.opacity(0.65)]), startPoint: .top, endPoint: .bottom))
+                            .clipShape(RoundedRectangle(cornerRadius: 35))
+                            .overlay(RoundedRectangle(cornerRadius: 35).stroke(Color.white, lineWidth: 1))
+                        Image(item.description)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 50, height: 50)
+                            .offset(x: -55, y: -150)
+                        Button(action: {
+                            self.isLiked.toggle()
+                        }) {
+                            if self.isLiked {
+                                Image(systemName: "heart.fill")
+                                    .resizable()
+                                    .frame(width: 27, height: 27)
+                                    .foregroundColor(.red)
+                            } else {
+                                Image(systemName: "heart.fill")
+                                    .resizable()
+                                    .frame(width: 25, height: 25)
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                        .offset(x: 60, y: -155)
                     }
                 }
             }
         }
     }
     
+
     
     
     struct ProductDetailView: View {
@@ -359,7 +411,7 @@ struct ProductCardView: View {
         
         var body: some View {
             ZStack {
-                LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [.purple, .red]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
                 VStack(alignment: .center) {
                     Image(item.description)
@@ -376,11 +428,11 @@ struct ProductCardView: View {
                         .clipShape(RoundedRectangle(cornerRadius: 20))
                         .shadow(radius: 10)
                         .padding(.bottom, 30)
+                    
                     Text(item.name)
                         .foregroundColor(.black)
                         .font(.system(size: 30, weight: .semibold, design: .rounded))
                         .padding(.bottom, 10)
-
                     
                     Spacer()
                 }
@@ -389,8 +441,8 @@ struct ProductCardView: View {
         }
     }
     
-
-
+    
+    
     
     struct Price: Identifiable {
         let id = UUID()
