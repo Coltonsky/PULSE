@@ -1,180 +1,401 @@
 import SwiftUI
+import Foundation
+
 
 struct ContentView: View {
     let popularItems = PopularItems().items
+    @State private var selectedIndex = 0
+    @State private var isProfileViewActive = false
+    @State private var showSecondaryIcons = false
+    @State private var currentIcon = "trending"
+    @State private var originalIcon = "trending"
+    @State private var icons = ["trending", "shirt", "pant", "accessories", "shoe"]
 
     var body: some View {
         NavigationView {
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .top, endPoint: .bottom)
                     .edgesIgnoringSafeArea(.all)
+                    .frame(minHeight: 0, maxHeight: .infinity)
+                
                 VStack(alignment: .center) {
-                    HStack {
-                        Text("trending")
-                            .foregroundColor(.white)
-                            .font(.title2)
-                            .fontWeight(.bold)
+                    VStack {
+                        Button(action: {
+                            withAnimation {
+                                if self.showSecondaryIcons {
+                                    self.showSecondaryIcons = false
+                                } else {
+                                    if self.selectedIndex != -1 {
+                                        self.originalIcon = self.currentIcon
+                                        self.showSecondaryIcons = true
+                                    } else {
+                                        self.currentIcon = self.originalIcon
+                                        self.selectedIndex = 0
+                                        self.showSecondaryIcons = false
+                                    }
+                                }
+                            }
+                        }) {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 20)
+                                    .frame(width: 75, height: 75)
+                                    .foregroundColor(.white)
+                                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white, lineWidth: 4))
+                                    .opacity(0.8)
+                                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                                    .padding(.bottom, 10)
+                                Image(currentIcon)
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                    .padding(.bottom, 10)
+                                    .foregroundColor(.white)
+                            }
+                            
+                        }
+                        
+                        if showSecondaryIcons {
+                            HStack(spacing: 25) {
+                                Button(action: {
+                                    self.selectedIndex = 0
+                                    self.currentIcon = "trending"
+                                    self.showSecondaryIcons = false
+                                }) {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color.orange)
+                                            .opacity(self.selectedIndex == 0 ? 0.8 : 0)
+                                            .frame(width: 35, height: 35)
+                                            .shadow(color: .white, radius: 5)
+                                        Image("trending")
+                                            .resizable()
+                                            .frame(width: 25, height: 25)
+                                            .foregroundColor(.white)
+                                    }
+                                }
+                                
+                                Button(action: {
+                                    self.selectedIndex = 1
+                                    self.currentIcon = "shirt"
+                                    self.showSecondaryIcons = false
+                                }) {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color.orange)
+                                            .opacity(self.selectedIndex == 1 ? 0.8 : 0)
+                                            .frame(width: 35, height: 35)
+                                            .shadow(color: .white, radius: 5)
+                                        Image("shirt")
+                                            .resizable()
+                                            .frame(width: 25, height: 25)
+                                            .foregroundColor(.white)
+                                    }
+                                }
+                                Button(action: {
+                                    self.selectedIndex = 2
+                                    self.currentIcon = "pant"
+                                    self.showSecondaryIcons = false
+                                }) {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color.orange)
+                                            .opacity(self.selectedIndex == 2 ? 0.8 : 0)
+                                            .frame(width: 35, height: 35)
+                                            .shadow(color: .white, radius: 5)
+                                        Image("pant")
+                                            .resizable()
+                                            .frame(width: 25, height: 25)
+                                            .foregroundColor(.white)
+                                    }
+                                }
+                                Button(action: {
+                                    self.selectedIndex = 3
+                                    self.currentIcon = "accessories"
+                                    self.showSecondaryIcons = false
+                                }) {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color.orange)
+                                            .opacity(self.selectedIndex == 3 ? 0.8 : 0)
+                                            .frame(width: 40, height: 40)
+                                            .shadow(color: .white, radius: 5)
+                                        Image("accessories")
+                                            .resizable()
+                                            .frame(width: 25, height: 25)
+                                            .foregroundColor(.white)
+                                    }
+                                }
+                                Button(action: {
+                                    self.selectedIndex = 4
+                                    self.currentIcon = "shoe"
+                                    self.showSecondaryIcons = false
+                                }) {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(Color.orange)
+                                            .opacity(self.selectedIndex == 4 ? 0.8 : 0)
+                                            .frame(width: 40, height: 40)
+                                            .shadow(color: .white, radius: 5)
+                                        Image("shoe")
+                                            .resizable()
+                                            .frame(width: 25, height: 25)
+                                            .foregroundColor(.white)
+                                    }
+                                }
+                            }
+                            .padding(.leading, 5)
+                            .transition(.slide)
+                        }
+                        HStack {
+                            ScrollView(.vertical) {
+                                VStack {
+                                    if self.selectedIndex == 0 {
+                                        ForEach(popularItems.filter { $0.categories.contains("top10trendingitems")}) { item in
+                                            ProductCardView(item: item)
+                                        }
+                                    } else if self.selectedIndex == 1 {
+                                        ForEach(popularItems.filter { $0.categories.contains("trendingtops")}) { item in
+                                            ProductCardView(item: item)
+                                        }
+                                    } else if self.selectedIndex == 2 {
+                                        ForEach(popularItems.filter { $0.categories.contains("trendingbottoms")}) { item in
+                                            ProductCardView(item: item)
+                                        }
+                                    } else if self.selectedIndex == 3 {
+                                        ForEach(popularItems.filter { $0.categories.contains("trendingaccessories")}) { item in
+                                            ProductCardView(item: item)
+                                        }
+                                    } else if self.selectedIndex == 4 {
+                                        ForEach(popularItems.filter { $0.categories.contains("trendingshoes")}) { item in
+                                            ProductCardView(item: item)
+                                        }
+                                    }
+                                }
+                            }
+                            .transition(.slide)
+                            .edgesIgnoringSafeArea(.all)
+                            .padding()
+                            
+                            
+                            .navigationBarItems(leading:
+                                                    NavigationLink(destination: SearchView(popularitems:popularItems)) {
+                                                        RoundedRectangle(cornerRadius: 10)
+                                                            .frame(width: 35, height: 35)
+                                                            .foregroundColor(.black)
+                                                            .opacity(0.8)
+                                                            .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                                                            .overlay(
+                                                                Image(systemName: "magnifyingglass")
+                                                                    .resizable()
+                                                                    .foregroundColor(.white)
+                                                                    .padding(10)
+                                                            )
+                                                    },
+                                                trailing:
+                                                    NavigationLink(destination: ProfileView()) {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .frame(width: 35, height: 35)
+                                    .foregroundColor(.black)
+                                    .opacity(0.8)
+                                    .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                                    .overlay(
+                                        Image(systemName: "person.fill")
+                                            .resizable()
+                                            .foregroundColor(.white)
+                                            .padding(10)
+                                    )
+                            }
+                            )
+                        }
                     }
-                    .padding()
-                    .background(LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .top, endPoint: .bottom))
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .shadow(radius: 10)
-                    
-                    HStack(spacing: -5) {
-                        VStack {
-                            Image(systemName: "figure.wave.circle.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .padding()
-                                .padding(.top, 10)
-                                .foregroundColor(.black)
-                            ScrollView(.vertical) {
-                                VStack {
-                                    ForEach(popularItems.filter { $0.categories.contains("clothing") }) { item in
-                                        ProductCardView(item: item)
-                                    }
-                                }
-                            }
-                            .padding()
-                        }
-                        VStack {
-                            Image(systemName: "bag.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .padding()
-                                .foregroundColor(.black)
-                                .padding(.top, 10)
-                            ScrollView(.vertical) {
-                                VStack {
-                                    ForEach(popularItems.filter { $0.categories.contains("accessories") }) { item in
-                                        ProductCardView(item: item)
-                                    }
-                                }
-                            }
-                            .padding()
-                        }
-                        VStack {
-                            Image(systemName: "10.circle.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                                .padding()
-                                .foregroundColor(.black)
-                                .padding(.top, 10)
-                            ScrollView(.vertical) {
-                                VStack {
-                                    ForEach(popularItems.filter { $0.categories.contains("trending") }) { item in
-                                        ProductCardView(item: item)
-                                    }
-                                }
-                            }
-                            .padding()
-                        }
-                    }
+                }
+            }
+        }
+    }
+    struct SearchView: View {
+        @State private var searchTerm: String = ""
+        let popularitems: [PopularItem]
 
+        var body: some View {
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
+                    .frame(minHeight: 0, maxHeight: .infinity)
+                VStack {
+                    HStack {
+                        TextField("Search by name, description, or brand", text: $searchTerm)
+                            .padding(.leading, 10)
+                            .frame(width: 325, height: 40)
+                            .background(Color.white)
+                            .cornerRadius(5.0)
+
+                        Button(action: {
+                            // perform search based on searchTerm
+                        }) {
+                            Image(systemName: "magnifyingglass")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                                .foregroundColor(.black)
+                        }
+                    }
+                    .padding(.top, 10)
+                    .padding(.bottom, 20)
+
+                    // Display search results here
+                    ScrollView(.vertical, showsIndicators: false) {
+                        VStack(alignment: .center, spacing: 20) {
+                            ForEach(popularitems.filter { item in
+                                self.searchTerm.isEmpty ? true :
+                                item.name.lowercased().contains(self.searchTerm.lowercased()) || item.description.lowercased().contains(self.searchTerm.lowercased()) || item.image.lowercased().contains(self.searchTerm.lowercased()) ||
+                                item.prices.contains(self.searchTerm)
+                                        }, id: \.id) { item in
+                                            ProductCardView(item: item)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+struct ProductCardView: View {
+    let item: PopularItem
+    @State private var isLiked: Bool = false
+
+    var body: some View {
+        NavigationLink(destination: ProductDetailView(item: item)) {
+            ZStack {
+                VStack(alignment: .center, spacing: -30) {
+                    Image(item.image)
+                    
+                        .resizable()
+                        .padding()
+                        .padding(.top, 15)
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 180, height: 180)
+                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                        .background(LinearGradient(gradient: Gradient(colors: [Color.white, Color.white.opacity(0.65)]), startPoint: .top, endPoint: .bottom))
+                        .clipShape(RoundedRectangle(cornerRadius: 35))
+                        .overlay(RoundedRectangle(cornerRadius: 35).stroke(Color.white, lineWidth: 1))
+                    Image(item.description)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 50, height: 50)
+                        .offset(x: -55, y: -150)
+                    Button(action: {
+                        self.isLiked.toggle()
+                    }) {
+                        if self.isLiked {
+                            Image(systemName: "heart.fill")
+                                .resizable()
+                                .frame(width: 27, height: 27)
+                                .foregroundColor(.red)
+                        } else {
+                            Image(systemName: "heart.fill")
+                                .resizable()
+                                .frame(width: 25, height: 25)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    .offset(x: 60, y: -155)
                 }
             }
         }
     }
 }
-
-struct ProductCardView: View {
-    let item: PopularItem
     
-    var body: some View {
-        NavigationLink(destination: ProductDetailView(item: item)) {
-            VStack(alignment: .center) {
-                Image(item.image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 100, height: 100)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .shadow(radius: 20)
+    struct ProfileView: View {
+        @State private var userClosetItems: [PopularItem] = []
+        
+        var body: some View {
+            NavigationView {
+                ZStack {
+                    LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .top, endPoint: .bottom)
+                        .edgesIgnoringSafeArea(.all)
+                    
+                    VStack(spacing: 20) {
+                        
+                        Circle()
+                                                .frame(width: 75, height: 75)
+                                                .foregroundColor(.white)
+                                                .overlay(Circle().stroke(Color.white, lineWidth: 4))
+                                                .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                                                .overlay(
+                                                    Image(systemName: "rectangle.stack.person.crop")
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fill)
+                                                        .padding(20)
+                                                )
+                            ForEach(0..<4, id: \.self) { index in
+                                HStack {
+                                    Image(index == 0 ? "shirt" : index == 1 ? "pant" : index == 2 ? "shoe" : "accessories")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                        .padding(.trailing, 50)
+                                        .foregroundColor(.white)
+                                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                                    
+                                    RoundedRectangle(cornerRadius: 20)
+                                        .frame(width: 125, height: 125)
+                                        .foregroundColor(.white)
+                                        .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white, lineWidth: 4))
+                                        .shadow(color: Color.black.opacity(0.1), radius: 5, x: 0, y: 5)
+                                        .padding(.trailing, 80)
+                                }
+                            }
+                        }
+                    }
+                }
             }
-            .padding(15)
-            .frame(maxWidth: 100, maxHeight: 100)
-            .background(LinearGradient(gradient: Gradient(colors: [Color(red:0.15, green:0.15, blue:0.15), Color(red:0.10, green:0.10, blue:0.10)]), startPoint: .top, endPoint: .bottom))
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-        }
-
-    }
-}
-
-
-struct ProductDetailView: View {
-    let item: PopularItem
-
-    var body: some View {
-        ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color(red:0.15, green:0.15, blue:0.15), Color(red:0.10, green:0.10, blue:0.10)]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.all)
-            VStack {
-                Image(item.image)
-                    .resizable()
-                    .frame(width: 300, height: 300)
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .shadow(radius: 10)
-                Text(item.name)
-                    .foregroundColor(.white)
-                    .font(.system(size: 32, weight: .semibold, design: .rounded))
-                    .padding(.bottom, 10)
-                Text(item.description)
-                    .foregroundColor(.white)
-                    .font(.system(size: 20, design: .rounded))
-                    .padding(.all, 20)
-                    .background(LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .top, endPoint: .bottom))
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .shadow(radius: 20)
-            }
-            .padding()
         }
     }
-}
+    
+    
+    
+    struct ProductDetailView: View {
+        let item: PopularItem
+        
+        var body: some View {
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.orange, .red]), startPoint: .top, endPoint: .bottom)
+                    .edgesIgnoringSafeArea(.all)
+                VStack(alignment: .center) {
+                    Image(item.description)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 100, height: 100)
+                        .frame(alignment: .topLeading)
+                        .shadow(radius: 10)
+                        .padding(.all, 20)
+                    
+                    Image(item.image)
+                        .resizable()
+                        .frame(width: 350, height: 350)
+                        .clipShape(RoundedRectangle(cornerRadius: 20))
+                        .shadow(radius: 10)
+                        .padding(.bottom, 30)
+                    Text(item.name)
+                        .foregroundColor(.black)
+                        .font(.system(size: 30, weight: .semibold, design: .rounded))
+                        .padding(.bottom, 10)
 
+                    
+                    Spacer()
+                }
+                .padding()
+            }
+        }
+    }
     
 
-struct Price: Identifiable {
-    let id = UUID()
-    let store: String
-    let price: Double
-}
 
-
-struct PopularItem: Identifiable {
-    var id: UUID
-    var name: String
-    var image: String
-    var prices: [Price]
-    var categories: [String]
-    var description: String
-}
-
-struct PopularItems {
-    let items: [PopularItem] = [
-        PopularItem(id: UUID(), name: "preppy tennis miniskirts", image: "miniskirts", prices: [], categories: ["clothing"], description: "Preppy tennis miniskirts are a popular fashion trend that combines the sporty look of tennis skirts with a preppy, collegiate style. They are often made from lightweight, breathable fabrics and feature pleats, stripes, or other preppy details."),
-        PopularItem(id: UUID(), name: "collegiate-inspired cardigan", image: "cardigan", prices: [], categories: ["clothing"], description: "Collegiate-inspired cardigans are a popular fashion trend that takes inspiration from the classic, preppy style of Ivy League universities. They often feature traditional details such as button-front closures, elbow patches, and cable-knit patterns."),
-        PopularItem(id: UUID(), name: "transparent jacket", image: "transparent", prices: [], categories: ["clothing"], description: "Transparent clothing is a fashion trend that features see-through fabrics and designs, often made from materials such as sheer chiffon or mesh. It can include clothing items such as dresses, skirts, or tops with transparent panels or details."),
-        PopularItem(id: UUID(), name: "cargo pockets", image: "cargopockets", prices: [], categories: ["clothing"], description: "Cargo pockets are a fashion trend that features clothing items, usually pants or shorts, that have large, functional pockets on the sides or legs. These pockets can be used to store items like wallets, keys, or phones and are often a popular choice for outdoor or active wear."),
-        PopularItem(id: UUID(), name: "Low Rise Chrome Heart Jeans", image: "ytwok", prices: [], categories: ["clothing"], description: "These are a type of denim jeans that feature a low-rise waist and embroidered Chrome Heart branding on the back pockets. This piece is very Y2K-inspired and has continued to make a comeback and will most likely remain a strong fashion statement."),
-        PopularItem(id: UUID(), name: "Blazers", image: "blazers", prices: [], categories: ["clothing"], description: "Blazers are a type of jacket that are designed to be worn as part of a formal or professional attire. They are a popular choice for those looking to return to the classics of the modern wardrobe, and are often paired with straight leg jeans, button down shirts, and interesting loafers or leather sneakers."),
-        PopularItem(id: UUID(), name: "Trench Coats", image: "trenchcoats", prices: [], categories: ["clothing"], description: "Trench coats are a type of coat that are designed to be worn in inclement weather. They are a popular choice for those looking to return to the classics of the modern wardrobe, and are often paired with straight leg jeans and blazers."),
-        PopularItem(id: UUID(), name: "oversized blazers", image: "blazers", prices: [], categories: ["clothing"], description: "Oversized blazers are a popular trend that features larger than normal blazers with a casual, relaxed look."),
-            PopularItem(id: UUID(), name: "corset-inspired tops", image: "corsets", prices: [], categories: ["clothing"], description: "Corset-inspired tops are a popular trend that features tops with corset-like detailing and a tight-to-the-body fit."),
-            PopularItem(id: UUID(), name: "sheer dresses", image: "sheer", prices: [], categories: ["clothing"], description: "Sheer dresses are a popular trend that features dresses made from sheer, semi-transparent fabrics."),
-            PopularItem(id: UUID(), name: "cutout tops", image: "cutouts", prices: [], categories: ["clothing"], description: "Cutout tops are a popular trend that features tops with cutout designs and dramatic waistlines."),
-       
-        
-        
-        PopularItem(id: UUID(), name: "chunky jewelry", image: "chunky", prices: [], categories: ["accessories"], description: "Chunky jewelry is a trend that features bold, statement-making pieces that are often large and attention-grabbing. They can be made from a variety of materials such as wood, plastic, or metal, and often feature colorful beads or large, chunky stones."),
-        PopularItem(id: UUID(), name: "Velvet Scrunchies", image: "scrunchies", prices: [], categories: ["accessories"], description: "These are a type of hair accessory that are made of velvet fabric and are designed to be worn around the wrist or in the hair. They are a popular choice among fashion-forward individuals and are often paired with oversized t-shirts or crop tops."),
-        PopularItem(id: UUID(), name: "Fleece Bucket Hat", image: "buckethat", prices: [], categories: ["accessories"], description: "These are a type of hat that are made of fleece fabric, and are designed to be worn for outdoor activities or casual events. They are a popular choice among fashion-forward individuals and are often paired with oversized t-shirts or crop tops."),
-        PopularItem(id: UUID(), name: "Vintage Brass Clutch", image: "brass_clutch", prices: [], categories: ["accessories"], description: "A fashionable trend that features vintage-inspired brass clutches with metal chain straps, perfect for adding a touch of nostalgia to any outfit."),
-        PopularItem(id: UUID(), name: "lug-sole loafers", image: "loafers", prices: [], categories: ["accessories"], description: "These are a type of shoe that features a thick sole with deep treads, ideal for outdoor or rugged terrain. They often have a casual, rugged look and are available in a variety of materials such as leather or suede."),
-        
-        
-        
-        
-
-    ]
-
-}
-
+    
+    struct Price: Identifiable {
+        let id = UUID()
+        let store: String
+        let price: String
+    }
+    
+    

@@ -8,8 +8,8 @@
 import SwiftUI
 
 @main
-struct The_PulseApp: App {
-    let persistenceController = PersistenceController.shared
+struct PULSEApp: App {
+
 
     var body: some Scene {
         WindowGroup {
